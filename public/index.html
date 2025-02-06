@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Scraper & WordPress Publisher</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen p-8">
+    <div id="notification" class="hidden"></div>
+    
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold mb-8">Web Scraper & WordPress Publisher</h1>
+        
+        <!-- Scraper Section -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-xl font-semibold mb-4">Web Scraper</h2>
+            <form id="scrapeForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">URL to Scrape</label>
+                    <input type="url" id="scrapeUrl" required 
+                           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                </div>
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                    Scrape Content
+                </button>
+            </form>
+            
+            <!-- Raw Data Result -->
+            <div id="scrapeResult" class="mt-4 hidden">
+                <h3 class="font-medium mb-2">Raw Data:</h3>
+                <div class="relative">
+                    <pre class="bg-gray-50 p-4 rounded overflow-auto"></pre>
+                    <button class="copy-btn absolute top-2 right-2 bg-blue-500 text-white px-3 py-1 rounded text-sm"
+                            data-target="scrapeResult">Copy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Editor -->
+        <div id="contentEditor" class="bg-white rounded-lg shadow-md p-6 mb-8 hidden">
+            <h2 class="text-xl font-semibold mb-4">Content Editor</h2>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Title</label>
+                    <div class="relative">
+                        <input type="text" id="wpTitle" required 
+                               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                        <button class="copy-btn absolute top-1 right-2 bg-blue-500 text-white px-3 py-1 rounded text-sm"
+                                data-target="wpTitle">Copy</button>
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Content</label>
+                    <div class="relative">
+                        <textarea id="wpContent" rows="8" required 
+                                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"></textarea>
+                        <button class="copy-btn absolute top-2 right-2 bg-blue-500 text-white px-3 py-1 rounded text-sm"
+                                data-target="wpContent">Copy</button>
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Status</label>
+                    <select id="wpStatus" 
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                        <option value="draft">Draft</option>
+                        <option value="publish">Publish</option>
+                        <option value="private">Private</option>
+                        <option value="pending">Pending Review</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Categories</label>
+                    <input type="text" id="wpCategories" placeholder="Comma-separated categories" 
+                           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Tags</label>
+                    <input type="text" id="wpTags" placeholder="Comma-separated tags" 
+                           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                </div>
+            </div>
+        </div>
+
+        <!-- WordPress Publisher -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-xl font-semibold mb-4">WordPress Publisher</h2>
+            <form id="wpForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">WordPress URL</label>
+                    <input type="url" id="wpUrl" required 
+                           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Username</label>
+                    <input type="text" id="username" required 
+                           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Password</label>
+                    <input type="password" id="password" required 
+                           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                </div>
+                <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+                    Publish to WordPress
+                </button>
+            </form>
+            <div id="wpResult" class="mt-4 hidden">
+                <h3 class="font-medium mb-2">Result:</h3>
+                <pre class="bg-gray-50 p-4 rounded overflow-auto"></pre>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
