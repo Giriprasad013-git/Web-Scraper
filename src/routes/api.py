@@ -48,10 +48,27 @@ def scrape_and_post():
     if 'error' in scraped_data:
         return jsonify(scraped_data), 400
         
+            #     data.append({
+            #     'tag': tag.name,
+            #     'content': text,
+            #     'attrs': dict(tag.attrs)  # Include tag attributes for clarity
+            # })
     # Process scraped data into a post
-    content = '\n'.join([f"<{item['tag']}>{item['content']}</{item['tag']}>" 
-                        for item in scraped_data])
-    
+    # content = '\n'.join([f"<{item['tag']}>{item['content']}</{item['tag']}>{item['attrs']}" 
+    #                     for item in scraped_data])
+    def attrs_to_str(attrs):
+        if not attrs:
+            return ''
+        return ' ' + ' '.join(
+            f'{key}="{(" ".join(value) if isinstance(value, list) else value)}"'
+            for key, value in attrs.items()
+        )
+
+    content = '\n'.join([
+        f"<{item['tag']}{attrs_to_str(item['attrs'])}>{item['content']}</{item['tag']}>"
+        for item in scraped_data
+    ])
+
     # Post to WordPress
     wp_api = WordPressAPI(
         wp_credentials['url'],
